@@ -17,7 +17,7 @@
 }
 
 .banner-content h1 {
-  font-size: 2rem;
+  font-size: 3rem;
   color: var(--clr-2);
 }
 
@@ -41,6 +41,10 @@
   font-size: 1.2rem;
 }
 
+.banner-img img {
+  width: 100%;
+}
+
 /*------Media Queries for Small devices-------*/
 
 @media screen and (max-width: 668px) {
@@ -53,6 +57,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
+  }
+
+  .banner-content h1 {
+    font-size: 1.5rem;
   }
 
   .banner-content {

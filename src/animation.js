@@ -1,4 +1,19 @@
 //Navbar
+const navlogo = {
+  hidden: {
+    opacity: 0,
+    y: -100,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      type: "spring",
+    },
+  },
+};
+
 const container = {
   hidden: { opacity: 1, scale: 0 },
   visible: {
@@ -40,4 +55,44 @@ const bannerButton = {
   },
 };
 
-export { container, item, banner, bannerButton };
+//items
+
+const itemsHeader = {
+  hidden: {
+    y: 40,
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+    },
+  },
+};
+
+//singleitem
+
+const singleItemAnimation = {
+  hidden: {
+    y: 40,
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+    },
+  },
+};
+
+export {
+  container,
+  item,
+  banner,
+  bannerButton,
+  itemsHeader,
+  singleItemAnimation,
+  navlogo,
+};

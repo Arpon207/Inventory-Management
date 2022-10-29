@@ -9,10 +9,7 @@ nav {
   left: 0;
   z-index: 9999;
   transition: 0.3s;
-}
-
-.navbar-logo h2 {
-  color: var(--clr-1);
+  background-color: transparent;
 }
 
 .navbar-links {
@@ -21,24 +18,21 @@ nav {
 }
 
 .navbar-links a {
-  color: var(--clr-2);
   font-weight: 400;
   text-transform: uppercase;
 }
 
 .navbar-links a.active {
-  color: var(--clr-1);
   position: relative;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
-.navbar-links .active::after {
+.navbar-links a.active::after {
   content: "";
   height: 5px;
   width: 5px;
-  background-color: orange;
   position: absolute;
   bottom: -0.4rem;
   border-radius: 50%;
@@ -55,11 +49,12 @@ nav {
   background-color: var(--clr-1);
   width: max-content;
   right: 0;
+  padding-left: 0;
 }
 
 .user p {
   cursor: pointer;
-  color: var(--clr-2);
+  color: var(--bgc-1);
   font-weight: 400;
   display: flex;
   align-items: center;
@@ -98,13 +93,36 @@ nav {
 }
 
 /*header on scroll*/
+/*transparent*/
 
-.nav-bg {
-  background-color: var(--clr-2);
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+.nav-bg-transparent {
+  background-color: transparent;
 }
 
-.nav-bg .navbar-logo h2 {
+.nav-bg-transparent .navbar-logo h3 {
+  color: var(--clr-1);
+}
+
+.nav-bg-transparent .navbar-links a,
+.nav-bg-transparent .navbar-links .user p {
+  color: var(--clr-2);
+}
+
+.nav-bg-transparent .navbar-links a.active {
+  color: var(--clr-1);
+}
+
+.nav-bg-transparent .navbar-links a.active::after {
+  background-color: var(--clr-1);
+}
+
+/*White*/
+
+.nav-bg {
+  background-color: white;
+}
+
+.nav-bg .navbar-logo h3 {
   color: var(--bgc-1);
 }
 
@@ -123,6 +141,29 @@ nav {
 
 .menu-toggle-btn {
   display: none;
+}
+
+/*dark*/
+
+.nav-dark {
+  background-color: var(--bgc-1);
+}
+
+.nav-dark .navbar-logo h3 {
+  color: var(--clr-1);
+}
+
+.nav-dark .navbar-links a,
+.nav-dark .navbar-links .user p {
+  color: var(--clr-2);
+}
+
+.nav-dark .navbar-links a.active {
+  color: var(--clr-3);
+}
+
+.nav-dark .navbar-links a.active::after {
+  background-color: var(--clr-3);
 }
 
 /*------Media Queries for Small devices-------*/
@@ -161,14 +202,14 @@ nav {
     text-align: left;
   }
 
-  .navbar-links a {
+  .open .navbar-links a {
     color: var(--bgc-1);
     font-weight: 400;
     font-size: 1.2rem;
   }
 
-  .navbar-links a.active {
-    color: lightcoral;
+  .open .navbar-links a.active {
+    color: var(--clr-3);
     display: initial;
   }
 
@@ -185,7 +226,11 @@ nav {
 
   /*user menu*/
 
-  .user p {
+  .nav-bg-transparent .navbar-links .user p {
+    color: unset;
+  }
+
+  .open .user p {
     cursor: pointer;
     color: var(--bgc-1);
     font-weight: 400;

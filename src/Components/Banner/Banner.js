@@ -1,6 +1,7 @@
 import React from "react";
 import "./Banner.css";
 import logo2 from "../../Images/benefits-of-inventory-management-software-removebg-preview.png";
+import logo3 from "../../Images/pexels-pixabay-260409.jpg";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 import { motion } from "framer-motion";
@@ -15,9 +16,7 @@ const Banner = () => {
         animate="visible"
         className="banner-content"
       >
-        <h1>
-          Manage your inventory in the <br /> best possible way
-        </h1>
+        <h1>Manage your inventory in the best possible way</h1>
         <p>
           As a part of your supply chain, inventory management includes aspects
           such as controlling and overseeing purchases from suppliers as well as

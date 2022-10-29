@@ -1,0 +1,99 @@
+.single-item {
+  width: 80%;
+  margin: 5rem auto 0;
+  display: grid;
+  grid-template-columns: 70% 30%;
+  gap: 1rem;
+}
+
+/*overview*/
+
+.overview img {
+  width: 100%;
+}
+
+.overview-title {
+  font-weight: 500;
+  position: relative;
+  width: fit-content;
+  margin-top: 1rem;
+}
+
+.overview-title::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  background-color: var(--clr-3);
+  bottom: 0;
+  left: 0;
+}
+
+.item-desc {
+  font-size: 0.9rem;
+  color: gray;
+  margin-top: 1rem;
+}
+
+.total-count {
+  padding: 2rem 15%;
+  margin: 1rem auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+  background-color: var(--bgc-1);
+  color: var(--clr-2);
+}
+
+.total-count div p {
+  font-size: 0.9rem;
+}
+
+/*details*/
+
+.item-detail {
+  background-color: var(--clr-1);
+  color: var(--bgc-1);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: fit-content;
+}
+
+.item-detail p {
+  font-weight: 600;
+}
+
+.item-detail p span {
+  color: var(--clr-3);
+}
+
+.item-title {
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+.item-price {
+  color: var(--bgc-1);
+}
+
+.item-specs ul {
+  font-weight: 400;
+  font-size: 0.9rem;
+  padding-left: 1rem;
+}
+
+.delivered-btn {
+  width: 100%;
+  background-color: var(--bgc-1);
+  color: var(--clr-2);
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  transition: 0.3s;
+  margin-bottom: 1rem;
+}
+
+.delivered-btn:hover {
+  background-color: #293462;
+}

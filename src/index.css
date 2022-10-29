@@ -7,7 +7,7 @@
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
   cursor: pointer;
 }
 
@@ -30,6 +30,7 @@ button {
 :root {
   --clr-1: #bce29e;
   --clr-2: #a5f1e9;
+  --clr-3: lightcoral;
   --bgc-1: #16213e;
 }
 
@@ -38,10 +39,18 @@ body {
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/*------Media Queries for Small devices-------*/
+
+@media screen and (max-width: 668px) {
+  .Container {
+    width: 90%;
+  }
 }

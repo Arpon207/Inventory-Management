@@ -1,0 +1,28 @@
+.item-card {
+  background-color: var(--bgc-1);
+  color: var(--clr-2);
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+}
+
+.item-card img {
+  width: 100%;
+}
+
+.item-card .item-desc {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.item-card .item-desc p {
+  font-size: 0.9rem;
+  color: var(--clr-3);
+}
+
+.item-card .item-desc button {
+  padding: 0.5rem 1.5rem;
+  background-color: var(--clr-1);
+  color: var(--bgc-1);
+  font-weight: 600;
+}

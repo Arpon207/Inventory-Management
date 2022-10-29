@@ -3,9 +3,15 @@ import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
 import icon from "./Images/Icons/go-up.png";
 import Router from "./Router";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    window.history.scrollRestoration = "manual";
+  }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -29,6 +35,18 @@ function App() {
       )}
       <Navbar />
       <Router />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

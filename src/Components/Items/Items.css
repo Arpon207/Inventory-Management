@@ -1,0 +1,32 @@
+.items {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.items-card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.items > div:last-child {
+  margin-top: 1rem;
+}
+
+.items > div:last-child > button {
+  color: var(--bgc-1);
+  background: none;
+  font-weight: 600;
+  text-decoration: underline;
+  display: inline-flex;
+  align-items: center;
+}
+
+/*------Media Queries for Small devices-------*/
+
+@media screen and (max-width: 668px) {
+  .items-card-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
