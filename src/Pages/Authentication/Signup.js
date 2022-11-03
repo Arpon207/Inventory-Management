@@ -1,17 +1,48 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import SocialLogin from "./../../Components/SocialLogin/SocialLogin";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import {
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
+import { auth } from "./../../Firebase/firebase.init";
+import { useEffect } from "react";
+import Loading from "../../Components/Loading/Loading";
 
 const Signup = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+  const [createUserWithEmailAndPassowrd, user, loading] =
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+
+  const [updateProfile] = useUpdateProfile(auth);
+
+  const onSubmit = async (data) => {
+    if (data) {
+      await createUserWithEmailAndPassowrd(data.email, data.password);
+      await updateProfile({ displayName: data.username });
+    }
+  };
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state;
+
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true });
+    }
+  }, [user]);
+
+  if (loading) {
+    return <Loading className={"user-loading"} />;
+  }
 
   return (
     <div className="signin">
@@ -67,10 +98,10 @@ const Signup = () => {
               type="password"
               {...register("confirmpassword", {
                 required: "Password is required.",
-                pattern: {
-                  value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                  message:
-                    "Password should contain minimum eight characters, at least one letter and one number.",
+                validate: (value) => {
+                  if (watch("password") !== value) {
+                    return "Password mismatched.";
+                  }
                 },
               })}
               placeholder="Confirm Password"

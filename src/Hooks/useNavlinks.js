@@ -37,7 +37,14 @@ const useNavlinks = () => {
               <li>My Items</li>
               <li>Manage Items</li>
               <li>Add Items</li>
-              <li onClick={() => signOut(auth)}>Sign Out</li>
+              <li
+                onClick={() => {
+                  signOut(auth);
+                  setIsActive(false);
+                }}
+              >
+                Sign Out
+              </li>
             </ul>
           ) : undefined}
         </div>

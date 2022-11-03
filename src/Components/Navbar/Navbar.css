@@ -50,6 +50,7 @@ nav {
   width: max-content;
   right: 0;
   padding-left: 0;
+  padding-bottom: 0.5rem;
 }
 
 .user p {

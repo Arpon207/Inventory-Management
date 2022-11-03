@@ -3,9 +3,9 @@ import "./AddItem.css";
 import { useForm } from "react-hook-form";
 import img from "../../Images/no-photo.jpg";
 import axios from "axios";
-import { Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loading from "../../Components/Loading/Loading";
 
 const AddItem = () => {
   const {
@@ -103,13 +103,7 @@ const AddItem = () => {
             <input className="submit-btn" type="submit" value={"ADD"} />
           </form>
         </div>
-        {loading ? (
-          <div className="loading-background">
-            <div className="loading">
-              <Spinner animation="border" variant="success" />
-            </div>
-          </div>
-        ) : undefined}
+        {loading ? <Loading className={"add-item-loading"} /> : undefined}
       </div>
     </>
   );

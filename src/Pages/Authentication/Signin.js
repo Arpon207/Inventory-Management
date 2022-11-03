@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Authentication.css";
 import { useForm } from "react-hook-form";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { auth } from "./../../Firebase/firebase.init";
+import Loading from "../../Components/Loading/Loading";
 
 const Signin = () => {
   const {
@@ -10,9 +13,30 @@ const Signin = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+  const [signInWithEmailAndPassword, user, loading] =
+    useSignInWithEmailAndPassword(auth);
+
+  const onSubmit = (data) => {
+    if (data) {
+      signInWithEmailAndPassword(data.email, data.password);
+    }
+  };
+
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true });
+    }
+  }, [user]);
+
+  if (loading) {
+    return <Loading className={"user-loading"} />;
+  }
 
   return (
     <div className="signin">
@@ -52,7 +76,9 @@ const Signin = () => {
           </div>
           <input type="submit" />
         </form>
-        <p onClick={() => navigate("/signup")}>Don't have an account?</p>
+        <p onClick={() => navigate("/signup", { state: from })}>
+          Don't have an account?
+        </p>
       </div>
     </div>
   );
