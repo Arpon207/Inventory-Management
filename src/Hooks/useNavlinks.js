@@ -1,5 +1,6 @@
 import { signOut } from "firebase/auth";
 import React, { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { auth } from "./../Firebase/firebase.init";
@@ -7,7 +8,7 @@ import { auth } from "./../Firebase/firebase.init";
 const useNavlinks = () => {
   const [isActive, setIsActive] = useState(false);
 
-  const [user] = useState(true);
+  const [user] = useAuthState(auth);
 
   const links = [
     {

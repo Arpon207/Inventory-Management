@@ -1,0 +1,19 @@
+.social-login-btns {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.social-login-btns button {
+  background: var(--clr-2);
+  display: flex;
+  align-items: center;
+  padding: 0.3rem;
+  border-radius: 50%;
+  color: #6c4ab6;
+  transition: 0.3s;
+  font-size: 1.1rem;
+}
+
+.social-login-btns button:hover {
+  background-color: var(--clr-3);
+}

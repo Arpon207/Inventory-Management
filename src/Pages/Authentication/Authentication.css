@@ -1,0 +1,70 @@
+.signin {
+  min-height: 100vh;
+  background-color: var(--bgc-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signin-form-container {
+  background: linear-gradient(135deg, #404258, #474e68);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0.5rem 2rem 0 rgba(0, 0, 0, 0.37);
+  padding: 2rem;
+  width: 30%;
+}
+
+.signin-form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.signin-form-container header {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.signin-form-container header h3 {
+  color: var(--clr-2);
+}
+
+.signin-form-container form input {
+  padding: 0.5rem;
+  width: 100%;
+  outline: none;
+  background-color: var(--clr-2);
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.signin-form-container form input[type="submit"] {
+  transition: 0.3s;
+}
+
+.signin-form-container form input[type="submit"]:hover {
+  background-color: var(--clr-3);
+}
+
+.input-box p {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  color: var(--clr-3);
+}
+
+.signin-form-container > p {
+  text-align: center;
+  color: var(--clr-1);
+  margin-top: 0.5rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.signin-form-container > p:hover {
+  color: var(--clr-3);
+}
