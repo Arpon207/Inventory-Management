@@ -1,6 +1,8 @@
+import { signOut } from "firebase/auth";
 import React, { useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { NavLink } from "react-router-dom";
+import { auth } from "./../Firebase/firebase.init";
 
 const useNavlinks = () => {
   const [isActive, setIsActive] = useState(false);
@@ -29,19 +31,19 @@ const useNavlinks = () => {
               className={isActive ? "arrow-down" : "arrow-up"}
             />
           </p>
-          {isActive && (
+          {isActive ? (
             <ul>
               <li>My Items</li>
               <li>Manage Items</li>
               <li>Add Items</li>
-              <li>Sign Out</li>
+              <li onClick={() => signOut(auth)}>Sign Out</li>
             </ul>
-          )}
+          ) : undefined}
         </div>
       ) : (
         <NavLink
           to={"/signin"}
-          className={({ isActive }) => isActive && "active"}
+          className={({ isActive }) => (isActive ? "active" : undefined)}
         >
           Signin
         </NavLink>

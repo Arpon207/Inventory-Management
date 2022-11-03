@@ -7,10 +7,14 @@ import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import ConfirmModal from "./../../Components/ConfirmModal/ConfirmModal";
+import { toast } from "react-toastify";
 
 const ManageInventory = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [modalShow, setModalShow] = React.useState(false);
+  const [id, setId] = useState({ itemId: "", cloudinaryId: "" });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,12 +23,40 @@ const ManageInventory = () => {
   }, []);
 
   const fetchItems = () => {
-    axios.get("http://localhost:5000/inventory/items/").then((response) => {
-      if (response.data.length > 0) {
-        setLoading(false);
-        setItems(response.data);
-      }
-    });
+    axios
+      .get("http://localhost:5000/inventory/items/")
+      .then((response) => {
+        if (response.data) {
+          setLoading(false);
+          setItems(response.data);
+        }
+      })
+      .catch((error) => {
+        if (error) {
+          setLoading(false);
+        }
+      });
+  };
+
+  const handleSetState = (itemId, cloudinaryId) => {
+    setId({ itemId: itemId, cloudinaryId: cloudinaryId });
+    setModalShow(true);
+  };
+
+  const handleDelete = () => {
+    axios
+      .delete(
+        `http://localhost:5000/inventory/items/delete?itemId=${id.itemId}&cloudinaryId=${id.cloudinaryId}`
+      )
+      .then((response) => {
+        if (response.status === 200) {
+          toast.success("Item deleted successfully");
+          const remaining = items.filter(
+            (item) => item._id !== response.data._id
+          );
+          setItems(remaining);
+        }
+      });
   };
 
   return (
@@ -36,9 +68,18 @@ const ManageInventory = () => {
           id="seach"
           placeholder="Search by Name"
         />
-        <button className="add-item-btn">ADD NEW ITEM</button>
+        <button
+          className="add-item-btn"
+          onClick={() => navigate("/manage-inventory/add")}
+        >
+          ADD NEW ITEM
+        </button>
       </div>
-      {items.length > 0 ? (
+      {loading ? (
+        <div className="loader">
+          <Spinner animation="border" variant="success" />
+        </div>
+      ) : items.length > 0 ? (
         <Table className="items-table" responsive="sm">
           <thead>
             <tr>
@@ -51,7 +92,7 @@ const ManageInventory = () => {
             </tr>
           </thead>
           <motion.tbody>
-            {items.map(({ _id, name, price, quantity }, i) => (
+            {items.map(({ _id, name, price, quantity, image }, i) => (
               <motion.tr key={i}>
                 <td>{i + 1}</td>
                 <td
@@ -67,7 +108,10 @@ const ManageInventory = () => {
                   <button className="edit-btn">
                     <AiFillEdit />
                   </button>
-                  <button className="delete-btn">
+                  <button
+                    onClick={() => handleSetState(_id, image.id)}
+                    className="delete-btn"
+                  >
                     <MdDelete />
                   </button>
                 </td>
@@ -75,16 +119,19 @@ const ManageInventory = () => {
             ))}
           </motion.tbody>
         </Table>
-      ) : loading ? (
-        <div className="loader">
-          <Spinner animation="border" variant="success" />
-        </div>
       ) : (
         <div className="empty-items-container">
           <p>No items to show.</p>
-          <button>Add new item</button>
+          <button onClick={() => navigate("/manage-inventory/add")}>
+            ADD NEW ITEM
+          </button>
         </div>
       )}
+      <ConfirmModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        handleDelete={handleDelete}
+      />
     </div>
   );
 };

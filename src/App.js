@@ -28,11 +28,11 @@ function App() {
   };
   return (
     <div className="App">
-      {show && (
+      {show ? (
         <div className="scroll-top" onClick={handleNavigate}>
           <img src={icon} alt="" />
         </div>
-      )}
+      ) : undefined}
       <Navbar />
       <Router />
       <ToastContainer

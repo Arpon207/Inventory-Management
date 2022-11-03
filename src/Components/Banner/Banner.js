@@ -6,8 +6,10 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 import { motion } from "framer-motion";
 import { banner, bannerButton } from "../../animation";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
+  const navigate = useNavigate();
   return (
     <section className="banner ">
       <motion.div
@@ -23,8 +25,8 @@ const Banner = () => {
           customers maintaining the storage of stock, controlling the amount of
           product for sale, and order fullfillment.
         </p>
-        <button>
-          Explore{" "}
+        <button onClick={() => navigate("manage-inventory")}>
+          Manage Inventory{" "}
           <motion.span
             variants={bannerButton}
             initial="hidden"

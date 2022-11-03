@@ -64,7 +64,9 @@ const Navbar = () => {
           {links.map(({ name, path, div }, i) => (
             <motion.li key={i} variants={item}>
               <NavLink
-                className={({ isActive }) => isActive && name && "active"}
+                className={({ isActive }) =>
+                  isActive ? (name ? "active" : undefined) : undefined
+                }
                 to={path}
                 end
               >

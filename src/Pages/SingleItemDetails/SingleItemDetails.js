@@ -9,6 +9,7 @@ import { singleItemAnimation } from "../../animation";
 const SingleItemDetails = () => {
   const [item, setItem] = useState({});
   const { id } = useParams();
+  console.log(id);
   useEffect(() => {
     const url = `http://localhost:5000/inventory/items/${id}`;
     axios.get(url).then((response) => setItem(response.data));
@@ -39,7 +40,7 @@ const SingleItemDetails = () => {
           initial="hidden"
           animate="visible"
         >
-          <img src={item.image} alt="" />
+          <img src={item.image?.url} alt="" />
           <p className="overview-title">OVERVIEW</p>
           <p className="item-desc">{item.description}</p>
           <div className="total-count">
@@ -64,30 +65,7 @@ const SingleItemDetails = () => {
           <p className="item-price">
             Price: <span>$ {item.price}.00</span>
           </p>
-          <div className="item-specs">
-            <p>Specifications :</p>
-            <ul>
-              <li>Frame : {item.specification?.frame}</li>
-              <li>Brakes : {item.specification?.brakes}</li>
-              <li>
-                Sizes : [
-                {item.specification?.sizes
-                  .slice(0, item.specification?.sizes.length - 1)
-                  .map((size) => (
-                    <span>{size + ", "}</span>
-                  ))}
-                <span>
-                  {item.specification?.sizes.slice(
-                    item.specification?.sizes.length - 1,
-                    item.specification?.sizes.length
-                  )}
-                </span>
-                ]
-              </li>
-              <li>Weight : {item.specification?.weight}</li>
-            </ul>
-          </div>
-          <p className="supplier">Suppler : {item.supplierName}</p>
+          <p className="supplier">Suppler : {item.supplier}</p>
           <div className="inventory">
             <p>
               Quantity: <span>{item.quantity}</span>
