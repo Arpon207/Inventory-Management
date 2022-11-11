@@ -74,7 +74,11 @@ const SingleItemDetails = () => {
               Sold: <span>{item.sold}</span>
             </p>
           </div>
-          <button onClick={() => handleDelivery(id)} className="delivered-btn">
+          <button
+            disabled={item.quantity < 1}
+            onClick={() => handleDelivery(id)}
+            className="delivered-btn"
+          >
             Delivered
           </button>
           <UpdateItem id={id} setItem={setItem} item={item} />

@@ -37,6 +37,10 @@
   outline: none;
 }
 
+.preview-image p {
+  color: var(--clr-2);
+}
+
 .preview-image .image-box {
   height: 400px;
   width: 400px;

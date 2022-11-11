@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "./../../Firebase/firebase.init";
 import Loading from "../../Components/Loading/Loading";
+import useGetToken from "./../../Hooks/useGetToken";
 
 const Signin = () => {
   const {
@@ -22,6 +23,8 @@ const Signin = () => {
       signInWithEmailAndPassword(data.email, data.password);
     }
   };
+
+  const [token] = useGetToken(user);
 
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";

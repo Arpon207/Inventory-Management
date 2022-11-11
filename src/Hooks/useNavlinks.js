@@ -2,7 +2,7 @@ import { signOut } from "firebase/auth";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { auth } from "./../Firebase/firebase.init";
 
 const useNavlinks = () => {
@@ -34,9 +34,18 @@ const useNavlinks = () => {
           </p>
           {isActive ? (
             <ul>
-              <li>My Items</li>
-              <li>Manage Items</li>
-              <li>Add Items</li>
+              <Link onClick={() => setIsActive(false)} to="/manage-inventory">
+                My Items
+              </Link>
+              <Link onClick={() => setIsActive(false)} to="/manage-inventory">
+                Manage Items
+              </Link>
+              <Link
+                onClick={() => setIsActive(false)}
+                to="/manage-inventory/add"
+              >
+                Add Items
+              </Link>
               <li
                 onClick={() => {
                   signOut(auth);

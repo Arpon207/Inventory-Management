@@ -2,18 +2,14 @@ import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./../../Firebase/firebase.init";
 import { Navigate, useLocation } from "react-router-dom";
-import { Spinner } from "react-bootstrap";
+import Loading from "../../Components/Loading/Loading";
 
 const RequireAuth = ({ children }) => {
   const [user, loading] = useAuthState(auth);
   const location = useLocation();
 
   if (loading) {
-    <div className="loading-background">
-      <div className="loading">
-        <Spinner animation="border" variant="success" />
-      </div>
-    </div>;
+    return <Loading />;
   }
 
   if (!user) {

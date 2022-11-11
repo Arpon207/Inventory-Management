@@ -2,7 +2,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 10%;
+  padding: 0 10%;
   position: fixed;
   top: 0;
   right: 0;
@@ -10,6 +10,7 @@ nav {
   z-index: 9999;
   transition: 0.3s;
   background-color: transparent;
+  height: 4rem;
 }
 
 .navbar-links {
@@ -51,6 +52,8 @@ nav {
   right: 0;
   padding-left: 0;
   padding-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .user p {
@@ -60,6 +63,7 @@ nav {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  margin-bottom: 0;
 }
 
 .arrow-down {
@@ -77,9 +81,10 @@ nav {
   transition: 0.3s;
 }
 
-.user li {
+.user li,
+.user a {
   width: 100%;
-  color: var(--bgc-1);
+  color: var(--bgc-1) !important;
   font-size: 0.8rem;
   font-weight: 400;
   cursor: pointer;
@@ -88,9 +93,10 @@ nav {
   transition: 0.2s;
 }
 
-.user li:hover {
+.user li:hover,
+.user a:hover {
   background-color: var(--bgc-1);
-  color: var(--clr-2);
+  color: var(--clr-2) !important;
 }
 
 /*header on scroll*/

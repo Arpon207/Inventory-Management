@@ -6,6 +6,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loading from "../../Components/Loading/Loading";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "./../../Firebase/firebase.init";
 
 const AddItem = () => {
   const {
@@ -15,22 +17,9 @@ const AddItem = () => {
   } = useForm();
   const [loading, setLoading] = useState(false);
   const [imageSrc, setImageSrc] = useState("");
+  const [user] = useAuthState(auth);
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    setLoading(true);
-    const item = { ...data, image: imageSrc };
-    if (item) {
-      const url = `http://localhost:5000/inventory/items/add`;
-      axios.post(url, item).then((response) => {
-        if (response.status === 200) {
-          setLoading(false);
-          toast.success("Item added successfully.");
-          navigate("/manage-inventory");
-        }
-      });
-    }
-  };
   const handleGetImage = (e) => {
     const file = e.target.files[0];
     const maxAllowedSize = 2 * 1024 * 1024;
@@ -50,7 +39,22 @@ const AddItem = () => {
       setImageSrc(reader.result);
     };
   };
-  console.log(errors);
+
+  const onSubmit = (data) => {
+    setLoading(true);
+    const item = { ...data, image: imageSrc, email: user.email };
+    if (item) {
+      const url = `http://localhost:5000/inventory/items/add`;
+      axios.post(url, item).then((response) => {
+        if (response.status === 200) {
+          setLoading(false);
+          toast.success("Item added successfully.");
+          navigate("/manage-inventory");
+        }
+      });
+    }
+  };
+
   return (
     <>
       <div className="add-item">
