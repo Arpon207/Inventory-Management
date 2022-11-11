@@ -1,5 +1,5 @@
 .banner {
-  height: 100vh;
+  min-height: 100vh;
   background-color: var(--bgc-1);
   display: grid;
   grid-template-columns: 1fr 1fr;

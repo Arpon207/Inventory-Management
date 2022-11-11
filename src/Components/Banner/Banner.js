@@ -1,7 +1,6 @@
 import React from "react";
 import "./Banner.css";
-import logo2 from "../../Images/benefits-of-inventory-management-software-removebg-preview.png";
-import logo3 from "../../Images/pexels-pixabay-260409.jpg";
+import bannerImg from "../../Images/banner-2.png";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 import { motion } from "framer-motion";
@@ -41,7 +40,7 @@ const Banner = () => {
           variants={banner}
           initial="hidden"
           animate="visible"
-          src={logo2}
+          src={bannerImg}
           alt=""
         />
       </div>

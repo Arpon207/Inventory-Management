@@ -9,6 +9,7 @@ import SingleItemDetails from "./Pages/SingleItemDetails/SingleItemDetails";
 import Signup from "./Pages/Authentication/Signup";
 import RequireAuth from "./Pages/Authentication/RequireAuth";
 import EditItemDetails from "./Pages/EditItemDetails/EditItemDetails.js";
+import NotFound from "./Pages/NotFound/NotFound";
 
 const Router = () => {
   return (
@@ -28,6 +29,7 @@ const Router = () => {
       <Route path="/signup" element={<Signup />} />
       <Route path="/manage-inventory/add" element={<AddItem />} />
       <Route path="/manage-inventory/edit/:id" element={<EditItemDetails />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

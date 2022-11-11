@@ -87,6 +87,27 @@ const singleItemAnimation = {
   },
 };
 
+//NotFound page
+
+const NotFoundContainer = {
+  hidden: { opacity: 1, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 0.5,
+      staggerChildren: 0.4,
+    },
+  },
+};
+
+const numberAnimation = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+  },
+};
+
 export {
   container,
   item,
@@ -95,4 +116,6 @@ export {
   itemsHeader,
   singleItemAnimation,
   navlogo,
+  NotFoundContainer,
+  numberAnimation,
 };
