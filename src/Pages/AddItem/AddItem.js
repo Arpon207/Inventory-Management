@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import Loading from "../../Components/Loading/Loading";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./../../Firebase/firebase.init";
+import PageTitle from "./../../Components/PageTitle/PageTitle";
 
 const AddItem = () => {
   const {
@@ -57,6 +58,7 @@ const AddItem = () => {
 
   return (
     <>
+      <PageTitle page={"ADD ITEM"} />
       <div className="add-item">
         <h3>Add Item</h3>
         <div className="add-item-container">

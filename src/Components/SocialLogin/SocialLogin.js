@@ -12,9 +12,12 @@ import { auth } from "./../../Firebase/firebase.init";
 
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import useGetToken from "./../../Hooks/useGetToken";
 
 const SocialLogin = () => {
   const [signInWithGoogle, user] = useSignInWithGoogle(auth);
+
+  const [token] = useGetToken(user);
 
   const navigate = useNavigate();
   const location = useLocation();

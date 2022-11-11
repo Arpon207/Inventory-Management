@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./../../Firebase/firebase.init";
 import { signOut } from "firebase/auth";
+import PageTitle from "../../Components/PageTitle/PageTitle";
 
 const ManageInventory = () => {
   const [items, setItems] = useState([]);
@@ -80,108 +81,116 @@ const ManageInventory = () => {
   );
 
   return (
-    <div className="manage-inventory">
-      <div className="manage-inventory-header">
-        <input
-          type="search"
-          id="search"
-          name="search"
-          placeholder="search by name"
-          onChange={(e) => setSearchText(e.target.value)}
-        />
-        <button
-          className="add-item-btn"
-          onClick={() => navigate("/manage-inventory/add")}
-        >
-          ADD NEW ITEM
-        </button>
-      </div>
-      {loading ? (
-        <div className="loader">
-          <Spinner animation="border" variant="success" />
-        </div>
-      ) : items.length > 0 ? (
-        <Table className="items-table" responsive="sm">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th id="th-name">Name</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Total</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map(({ _id, name, price, quantity, image, ...rest }, i) => (
-              <tr className={quantity === 0 ? "bg-danger" : undefined} key={i}>
-                <td>{i + 1}</td>
-                <td
-                  onClick={() => navigate(`/manage-inventory/${_id}`)}
-                  id="td-name"
-                >
-                  {name}
-                </td>
-                <td>$ {price}.00</td>
-                <td>{quantity}</td>
-                <td>$ {price * quantity}.00</td>
-                <td className="buttons">
-                  <button
-                    onClick={() =>
-                      navigate(`/manage-inventory/edit/${_id}`, {
-                        state: {
-                          _id,
-                          name,
-                          price,
-                          quantity,
-                          image,
-                          rest,
-                        },
-                      })
-                    }
-                    className="edit-btn"
-                  >
-                    <AiFillEdit />
-                  </button>
-                  <button
-                    onClick={() => handleSetState(_id, image.id)}
-                    className="delete-btn"
-                  >
-                    <MdDelete />
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      ) : (
-        <div className="empty-items-container">
-          <p>No items to show.</p>
-          <button onClick={() => navigate("/manage-inventory/add")}>
+    <>
+      <PageTitle page="MANAGE" />
+      <div className="manage-inventory">
+        <div className="manage-inventory-header">
+          <input
+            type="search"
+            id="search"
+            name="search"
+            placeholder="search by name"
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+          <button
+            className="add-item-btn"
+            onClick={() => navigate("/manage-inventory/add")}
+          >
             ADD NEW ITEM
           </button>
         </div>
-      )}
-      <div className="inventory-status">
-        <div>
-          <small>Total Items</small>
-          <h3>{items.length}</h3>
+        {loading ? (
+          <div className="loader">
+            <Spinner animation="border" variant="success" />
+          </div>
+        ) : items.length > 0 ? (
+          <Table className="items-table" responsive="sm">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th id="th-name">Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {items.map(
+                ({ _id, name, price, quantity, image, ...rest }, i) => (
+                  <tr
+                    className={quantity === 0 ? "bg-danger" : undefined}
+                    key={i}
+                  >
+                    <td>{i + 1}</td>
+                    <td
+                      onClick={() => navigate(`/manage-inventory/${_id}`)}
+                      id="td-name"
+                    >
+                      {name}
+                    </td>
+                    <td>$ {price}.00</td>
+                    <td>{quantity}</td>
+                    <td>$ {price * quantity}.00</td>
+                    <td className="buttons">
+                      <button
+                        onClick={() =>
+                          navigate(`/manage-inventory/edit/${_id}`, {
+                            state: {
+                              _id,
+                              name,
+                              price,
+                              quantity,
+                              image,
+                              rest,
+                            },
+                          })
+                        }
+                        className="edit-btn"
+                      >
+                        <AiFillEdit />
+                      </button>
+                      <button
+                        onClick={() => handleSetState(_id, image.id)}
+                        className="delete-btn"
+                      >
+                        <MdDelete />
+                      </button>
+                    </td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </Table>
+        ) : (
+          <div className="empty-items-container">
+            <p>No items to show.</p>
+            <button onClick={() => navigate("/manage-inventory/add")}>
+              ADD NEW ITEM
+            </button>
+          </div>
+        )}
+        <div className="inventory-status">
+          <div>
+            <small>Total Items</small>
+            <h3>{items.length}</h3>
+          </div>
+          <div>
+            <small>Total value</small>
+            <h3>{totalPrice.toLocaleString("en-US")}.00</h3>
+          </div>
+          <div>
+            <small>Out of stock</small>
+            <h3>{items.filter((item) => item.quantity === 0).length}</h3>
+          </div>
         </div>
-        <div>
-          <small>Total value</small>
-          <h3>{totalPrice.toLocaleString("en-US")}.00</h3>
-        </div>
-        <div>
-          <small>Out of stock</small>
-          <h3>{items.filter((item) => item.quantity === 0).length}</h3>
-        </div>
+        <ConfirmModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          handleDelete={handleDelete}
+        />
       </div>
-      <ConfirmModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-        handleDelete={handleDelete}
-      />
-    </div>
+    </>
   );
 };
 

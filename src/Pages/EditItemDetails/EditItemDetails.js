@@ -4,6 +4,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import Loading from "../../Components/Loading/Loading";
+import PageTitle from "./../../Components/PageTitle/PageTitle";
 
 const EditItemDetails = () => {
   const [item, setItem] = useState({});
@@ -53,6 +54,7 @@ const EditItemDetails = () => {
 
   return (
     <>
+      <PageTitle page="EDIT ITEM" />
       <div className="add-item">
         <h3>Edit Item</h3>
         <div className="add-item-container">

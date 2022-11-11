@@ -5,11 +5,11 @@ import "./SingleItemDetails.css";
 import UpdateItem from "../../Components/UpdateItem/UpdateItem";
 import { motion } from "framer-motion";
 import { singleItemAnimation } from "../../animation";
+import PageTitle from "../../Components/PageTitle/PageTitle";
 
 const SingleItemDetails = () => {
   const [item, setItem] = useState({});
   const { id } = useParams();
-  console.log(id);
   useEffect(() => {
     const url = `http://localhost:5000/inventory/items/${id}`;
     axios.get(url).then((response) => setItem(response.data));
@@ -33,6 +33,7 @@ const SingleItemDetails = () => {
 
   return (
     <>
+      <PageTitle page={`${item.name}`} />
       <section className="single-item">
         <motion.div
           className="overview"
