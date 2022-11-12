@@ -10,6 +10,11 @@ const useNavlinks = () => {
 
   const [user] = useAuthState(auth);
 
+  const handleLogOut = () => {
+    signOut(auth);
+    setIsActive(false);
+  };
+
   const links = [
     {
       name: "Home",
@@ -46,14 +51,7 @@ const useNavlinks = () => {
               >
                 Add Items
               </Link>
-              <li
-                onClick={() => {
-                  signOut(auth);
-                  setIsActive(false);
-                }}
-              >
-                Sign Out
-              </li>
+              <li onClick={handleLogOut}>Sign Out</li>
             </ul>
           ) : undefined}
         </div>

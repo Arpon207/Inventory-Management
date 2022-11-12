@@ -11,22 +11,24 @@ const SingleItemDetails = () => {
   const [item, setItem] = useState({});
   const { id } = useParams();
   useEffect(() => {
-    const url = `http://localhost:5000/inventory/items/${id}`;
+    const url = `https://inventory-management207.herokuapp.com/inventory/items/${id}`;
     axios.get(url).then((response) => setItem(response.data));
   }, [id]);
 
   const handleDelivery = (id) => {
-    const url = `http://localhost:5000/inventory/items/${id}`;
+    const url = `https://inventory-management207.herokuapp.com/inventory/items/${id}`;
     axios
       .put(url, {
         quantity: item.quantity - 1,
         sold: item.sold + 1,
+        totalSold: item.totalSold + item.price,
       })
       .then((response) => {
         setItem({
           ...item,
           quantity: response.data.quantity,
           sold: response.data.sold,
+          totalSold: response.data.totalSold,
         });
       });
   };
@@ -51,7 +53,7 @@ const SingleItemDetails = () => {
             </div>
             <div>
               <p>Total Sold</p>
-              <h1>{item.price * item.sold} $</h1>
+              <h1>{item.totalSold} $</h1>
             </div>
             <div></div>
           </div>

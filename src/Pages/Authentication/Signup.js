@@ -7,7 +7,6 @@ import {
 } from "react-firebase-hooks/auth";
 import { auth } from "./../../Firebase/firebase.init";
 import { useEffect } from "react";
-import Loading from "../../Components/Loading/Loading";
 import PageTitle from "./../../Components/PageTitle/PageTitle";
 import useGetToken from "./../../Hooks/useGetToken";
 
@@ -19,7 +18,7 @@ const Signup = () => {
     watch,
   } = useForm();
 
-  const [createUserWithEmailAndPassowrd, user, loading] =
+  const [createUserWithEmailAndPassowrd, user] =
     useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
 
   const [updateProfile] = useUpdateProfile(auth);
@@ -39,14 +38,10 @@ const Signup = () => {
   const from = location.state;
 
   useEffect(() => {
-    if (user) {
+    if (token) {
       navigate(from, { replace: true });
     }
-  }, [user]);
-
-  if (loading) {
-    return <Loading className={"user-loading"} />;
-  }
+  }, [token]);
 
   return (
     <>

@@ -45,7 +45,7 @@ const AddItem = () => {
     setLoading(true);
     const item = { ...data, image: imageSrc, email: user.email };
     if (item) {
-      const url = `http://localhost:5000/inventory/items/add`;
+      const url = `https://inventory-management207.herokuapp.com/inventory/items/add`;
       axios.post(url, item).then((response) => {
         if (response.status === 200) {
           setLoading(false);

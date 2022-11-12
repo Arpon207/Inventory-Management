@@ -17,7 +17,7 @@ const EditItemDetails = () => {
   const { name, image, price, quantity, rest } = location?.state;
 
   useEffect(() => {
-    const url = `http://localhost:5000/inventory/items/${id}`;
+    const url = `https://inventory-management207.herokuapp.com/inventory/items/${id}`;
     axios.get(url).then((response) => setItem(response.data));
   }, [id]);
 
@@ -37,11 +37,12 @@ const EditItemDetails = () => {
       image: image,
       sold: rest.sold,
       email: rest.email,
+      totalSold: rest.totalSold,
       ...data,
     };
 
     if (updateData) {
-      const url = `http://localhost:5000/inventory/items/edit/${id}`;
+      const url = `https://inventory-management207.herokuapp.com/inventory/items/edit/${id}`;
       axios.put(url, updateData).then((response) => {
         if (response.status === 200) {
           setLoading(false);

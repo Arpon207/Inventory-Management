@@ -24,10 +24,10 @@ const SocialLogin = () => {
   const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
-    if (user) {
+    if (token) {
       navigate(from, { replace: true });
     }
-  }, [user]);
+  }, [token]);
 
   return (
     <div className="social-login-btns">

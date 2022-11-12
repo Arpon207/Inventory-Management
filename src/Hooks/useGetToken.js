@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const useGetToken = (user) => {
-  const [token, setToken] = useState([]);
-  const email = user?.user?.email;
+  const [token, setToken] = useState("");
   useEffect(() => {
+    const email = user?.user?.email;
     if (email) {
       const getToken = async () => {
         const { data } = await axios.post(
-          "http://localhost:5000/inventory/token/",
+          "https://inventory-management207.herokuapp.com/inventory/token/",
           { email: email }
         );
         setToken(data);
@@ -16,7 +16,7 @@ const useGetToken = (user) => {
       };
       getToken();
     }
-  }, [email]);
+  }, [user]);
   return [token, setToken];
 };
 

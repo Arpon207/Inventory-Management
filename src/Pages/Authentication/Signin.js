@@ -5,7 +5,6 @@ import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "./../../Firebase/firebase.init";
-import Loading from "../../Components/Loading/Loading";
 import useGetToken from "./../../Hooks/useGetToken";
 import PageTitle from "./../../Components/PageTitle/PageTitle";
 
@@ -16,7 +15,7 @@ const Signin = () => {
     formState: { errors },
   } = useForm();
 
-  const [signInWithEmailAndPassword, user, loading] =
+  const [signInWithEmailAndPassword, user] =
     useSignInWithEmailAndPassword(auth);
 
   const onSubmit = (data) => {
@@ -33,14 +32,10 @@ const Signin = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) {
+    if (token) {
       navigate(from, { replace: true });
     }
-  }, [user]);
-
-  if (loading) {
-    return <Loading className={"user-loading"} />;
-  }
+  }, [token]);
 
   return (
     <>

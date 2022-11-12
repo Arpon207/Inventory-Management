@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ManageInventory.css";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Spinner, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./../../Firebase/firebase.init";
 import { signOut } from "firebase/auth";
 import PageTitle from "../../Components/PageTitle/PageTitle";
+import Loading from "../../Components/Loading/Loading";
 
 const ManageInventory = () => {
   const [items, setItems] = useState([]);
@@ -27,31 +28,28 @@ const ManageInventory = () => {
     fetchItems();
   }, [searchText]);
 
-  const fetchItems = () => {
-    axios
-      .get(
-        `http://localhost:5000/inventory/items?email=${user.email}&searchText=${searchText}`,
+  const fetchItems = async () => {
+    const email = user.email;
+    try {
+      const { data } = await axios.get(
+        `https://inventory-management207.herokuapp.com/inventory/items?email=${email}&searchText=${searchText}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
         }
-      )
-      .then((response) => {
-        if (response.data) {
-          setLoading(false);
-          setItems(response.data);
-        }
-      })
-      .catch((error) => {
-        if (error) {
-          setLoading(false);
-          if (error.response.status === 401 || error.response.status === 403) {
-            signOut(auth);
-            navigate("/signin");
-          }
-        }
-      });
+      );
+      if (data) {
+        setLoading(false);
+        setItems(data);
+      }
+    } catch (error) {
+      setLoading(false);
+      if (error.response.status === 401 || error.response.status === 403) {
+        signOut(auth);
+        navigate("/signin");
+      }
+    }
   };
 
   const handleSetState = (itemId, cloudinaryId) => {
@@ -62,7 +60,7 @@ const ManageInventory = () => {
   const handleDelete = () => {
     axios
       .delete(
-        `http://localhost:5000/inventory/items/delete?itemId=${id.itemId}&cloudinaryId=${id.cloudinaryId}`
+        `https://inventory-management207.herokuapp.com/inventory/items/delete?itemId=${id.itemId}&cloudinaryId=${id.cloudinaryId}`
       )
       .then((response) => {
         if (response.status === 200) {
@@ -100,9 +98,7 @@ const ManageInventory = () => {
           </button>
         </div>
         {loading ? (
-          <div className="loader">
-            <Spinner animation="border" variant="success" />
-          </div>
+          <Loading />
         ) : items.length > 0 ? (
           <Table className="items-table" responsive="sm">
             <thead>

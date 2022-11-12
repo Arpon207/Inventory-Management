@@ -11,7 +11,7 @@ const Items = () => {
   const [items, setItems] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/inventory/items/")
+      .get("https://inventory-management207.herokuapp.com/inventory/items/")
       .then((response) => setItems(response.data));
   }, []);
 

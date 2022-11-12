@@ -10,7 +10,7 @@ const UpdateItem = ({ id, item, setItem }) => {
     const price = parseInt(e.target.price.value) || item.price;
     const quantity =
       parseInt(e.target.quantity.value) + item.quantity || item.quantity;
-    const url = `http://localhost:5000/inventory/items/${id}`;
+    const url = `https://inventory-management207.herokuapp.com/inventory/items/${id}`;
     if (parseInt(e.target.price.value) || parseInt(e.target.quantity.value)) {
       axios
         .put(url, {
